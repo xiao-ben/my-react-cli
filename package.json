@@ -35,11 +35,11 @@
   },
   "lint-staged": {
     "*.js": [
-      "npm run lint:fix",
+      "yarn lint:fix",
       "git add"
     ],
     "*.svg": [
-      "npm run svgo_icon",
+      "yarn svgo_icon",
       "git add"
     ]
   },
@@ -51,10 +51,12 @@
     "@commitlint/cli": "^8.1.0",
     "@commitlint/config-angular": "^8.1.0",
     "@commitlint/config-conventional": "^8.1.0",
+    "app-root-dir": "^1.0.2",
     "autoprefixer": "^9.6.1",
     "babel-eslint": "^10.0.2",
     "babel-loader": "^8.0.6",
     "clean-webpack-plugin": "^3.0.0",
+    "consola": "^2.10.1",
     "css-loader": "^3.2.0",
     "eslint-plugin-react-hooks": "^1.6.1",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
