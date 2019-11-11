@@ -10,9 +10,9 @@ class App extends React.Component {
     return (
       <div>
         <div className={styles.title} onClick={() => {
-          console.log(11)
+          console.log(111231)
         }}>
-          hot1
+          hot
         </div>
         <Home />
       </div>

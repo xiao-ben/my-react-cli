@@ -9,7 +9,7 @@ import path from 'path'
 import appRoot from 'app-root-dir'
 import serve from 'koa-static'
 import Koa from 'koa'
-import { renderHtml } from './template'
+import { renderHtml, reader } from './template'
 
 let server = null
 const port = process.env.SERVER_PORT || 5000
@@ -19,8 +19,8 @@ const app = new Koa()
 const router = new Router()
 
 if (isProd) {
-  // router.get('/client/*', serve(path.join(appRoot.get(), '/build/client')))
   router.get('/', ctx => {
+    const jsPath = reader()
     const css = new Set()
     const insertCss = (...styles) => styles.forEach(style => css.add(style._getCss()))
     const body = renderToString(
@@ -28,12 +28,12 @@ if (isProd) {
         <App />
       </StyleContext.Provider>
     )
-    const html = renderHtml(css, body)
+    const html = renderHtml(css, body, jsPath)
     ctx.body = html
   })
   app.use(router.routes())
   app.use(serve(path.join(appRoot.get(), '/build/client')))
-  console.log(path.join(appRoot.get(), '/build/client'))
+
   app.listen(port, () => {
     console.log(`服务器已启动，请访问http://127.0.0.1:${port}`)
   })
@@ -43,6 +43,7 @@ if (isProd) {
   })))
 
   router.get('/', ctx => {
+    const jsPath = reader()
     const css = new Set()
     const insertCss = (...styles) => styles.forEach(style => css.add(style._getCss()))
     const body = renderToString(
@@ -50,7 +51,7 @@ if (isProd) {
         <App />
       </StyleContext.Provider>
     )
-    const html = renderHtml(css, body)
+    const html = renderHtml(css, body, jsPath)
     ctx.body = html
   })
 

@@ -6,8 +6,9 @@
   "license": "MIT",
   "scripts": {
     "start": "yarn dev",
-    "dev": "node ./scripts/dev.js",
-    "build": "NODE_ENV=production node ./scripts/build.js",
+    "dev": "yarn clean && node ./scripts/dev.js",
+    "build": "yarn clean && NODE_ENV=production node ./scripts/build.js",
+    "clean": "rm -rf build",
     "lint": "standardx",
     "lint:fix": "standardx --fix",
     "svgo_icon": "node ./scripts/svg_icon.js"

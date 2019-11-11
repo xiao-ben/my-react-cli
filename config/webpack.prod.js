@@ -1,6 +1,7 @@
 
 const webpackConfigCreator = require('./webpack.common')
 const path = require('path')
+const ManifestPlugin = require('webpack-manifest-plugin')
 const merge = require('webpack-merge')
 const OptimizeCss = require('optimize-css-assets-webpack-plugin')
 
@@ -9,6 +10,7 @@ const config = {
     path.join(__dirname, '../client/index.js')
   ],
   output: {
+    filename: '[name].[hash].js',
     path: path.resolve(__dirname, '../build/client'),
     publicPath: '/'
   },
@@ -17,6 +19,10 @@ const config = {
       cssProcessor: require('cssnano'),
       cssProcessorOptions: { discardComments: { removeAll: true } },
       canPrint: true
+    }),
+    new ManifestPlugin({
+      writeToFileEmit: true,
+      fileName: `manifest.json`
     })
   ]
 }

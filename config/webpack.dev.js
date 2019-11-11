@@ -2,6 +2,7 @@ const webpackConfigCreator = require('./webpack.common')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const merge = require('webpack-merge')
 const ManifestPlugin = require('webpack-manifest-plugin')
+const WebpackBar = require('webpackbar')
 const path = require('path')
 
 const port = process.env.CLIENT_PORT || 5001
@@ -10,6 +11,7 @@ const config = {
     path.join(__dirname, '../client/index.js')
   ],
   output: {
+    filename: '[name].[hash].js',
     path: path.resolve(__dirname, '../build/client'),
     publicPath: '/public/'
   },
@@ -26,6 +28,10 @@ const config = {
     }
   },
   plugins: [
+    new WebpackBar({
+      name: 'client',
+      color: 'green'
+    }),
     new ManifestPlugin({
       writeToFileEmit: true,
       fileName: `manifest.json`

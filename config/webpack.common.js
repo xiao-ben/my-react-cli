@@ -1,5 +1,4 @@
 const webpack = require('webpack')
-const WebpackBar = require('webpackbar')
 const autoprefixer = require('autoprefixer')
 
 function webpackCommonConfigCreator (options) {
@@ -73,8 +72,7 @@ function webpackCommonConfigCreator (options) {
       }
     },
     plugins: [
-      new webpack.HotModuleReplacementPlugin(),
-      new WebpackBar()
+      new webpack.HotModuleReplacementPlugin()
     ],
     optimization: {
       splitChunks: {
