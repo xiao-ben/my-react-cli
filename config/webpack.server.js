@@ -5,9 +5,11 @@ const StartServerPlugin = require('start-server-webpack-plugin')
 const nodeExternals = require('webpack-node-externals')
 const path = require('path')
 
+const isProd = process.env.NODE_ENV === 'production'
+
 const config = {
   target: 'node',
-  entry: ['webpack/hot/signal', './server/index.js'],
+  entry: [!isProd && 'webpack/hot/signal', './server/index.js'].filter(Boolean),
   output: {
     filename: 'server.js',
     path: path.resolve(__dirname, '../build/server'),
@@ -18,19 +20,19 @@ const config = {
       name: 'server',
       color: 'yellow'
     }),
-    new StartServerPlugin({
+    !isProd && new StartServerPlugin({
       name: 'server.js',
       keyboard: true,
       signal: true
     })
-  ],
+  ].filter(Boolean),
   externals: [nodeExternals({
     whitelist: ['webpack/hot/signal']
   })]
 }
 
 const options = {
-  mode: 'development'
+  mode: isProd ? 'production' : 'development'
 }
 
 module.exports = merge(webpackConfigCreator(options), config)

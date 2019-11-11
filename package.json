@@ -7,7 +7,7 @@
   "scripts": {
     "start": "yarn dev",
     "dev": "node ./scripts/dev.js",
-    "build": "node ./scripts/build.js",
+    "build": "NODE_ENV=production node ./scripts/build.js",
     "lint": "standardx",
     "lint:fix": "standardx --fix",
     "svgo_icon": "node ./scripts/svg_icon.js"

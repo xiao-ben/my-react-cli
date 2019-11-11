@@ -12,7 +12,7 @@ class App extends React.Component {
         <div className={styles.title} onClick={() => {
           console.log(11)
         }}>
-          hot123
+          hot1
         </div>
         <Home />
       </div>
