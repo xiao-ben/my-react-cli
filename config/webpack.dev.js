@@ -16,6 +16,7 @@ const config = {
     publicPath: '/public/'
   },
   devServer: {
+    disableHostCheck: true,
     contentBase: path.join(__dirname, '../build/client'),
     hot: true,
     inline: true,

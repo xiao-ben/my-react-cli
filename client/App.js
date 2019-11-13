@@ -4,6 +4,12 @@ import withStyles from 'isomorphic-style-loader/withStyles'
 import Home from './pages/Home/Home'
 import styles from './App.css'
 
+if (typeof window !== 'undefined') {
+  var VConsole = require('vconsole')
+  /* eslint-disable no-unused-vars */
+  var vConsole = new VConsole()
+}
+
 class App extends React.Component {
   render () {
     console.log('app-render------')
