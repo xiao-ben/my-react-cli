@@ -18,18 +18,23 @@ const isProd = process.env.NODE_ENV === 'production'
 const app = new Koa()
 const router = new Router()
 
+const renderString = (ssrData) => {
+  const jsPath = reader()
+  const css = new Set()
+  const insertCss = (...styles) => styles.forEach(style => css.add(style._getCss()))
+  const body = renderToString(
+    <StyleContext.Provider value={{ insertCss }}>
+      <App ssrData={ssrData} />
+    </StyleContext.Provider>
+  )
+  return renderHtml(css, body, jsPath, ssrData)
+}
+
 if (isProd) {
   router.get('/', ctx => {
-    const jsPath = reader()
-    const css = new Set()
-    const insertCss = (...styles) => styles.forEach(style => css.add(style._getCss()))
-    const body = renderToString(
-      <StyleContext.Provider value={{ insertCss }}>
-        <App />
-      </StyleContext.Provider>
-    )
-    const html = renderHtml(css, body, jsPath)
-    ctx.body = html
+    App.getInitialData().then(ssrData => {
+      ctx.body = renderString(ssrData)
+    })
   })
   app.use(router.routes())
   app.use(serve(path.join(appRoot.get(), '/build/client')))
@@ -43,16 +48,9 @@ if (isProd) {
   })))
 
   router.get('/', ctx => {
-    const jsPath = reader()
-    const css = new Set()
-    const insertCss = (...styles) => styles.forEach(style => css.add(style._getCss()))
-    const body = renderToString(
-      <StyleContext.Provider value={{ insertCss }}>
-        <App />
-      </StyleContext.Provider>
-    )
-    const html = renderHtml(css, body, jsPath)
-    ctx.body = html
+    App.getInitialData().then(ssrData => {
+      ctx.body = renderString(ssrData)
+    })
   })
 
   app.use(router.routes())

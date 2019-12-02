@@ -1,6 +1,6 @@
 import React from 'react'
 import StyleContext from 'isomorphic-style-loader/StyleContext'
-import ReactDom from 'react-dom'
+import ReactDOM from 'react-dom'
 import App from './App.js'
 
 const insertCss = (...styles) => {
@@ -8,8 +8,14 @@ const insertCss = (...styles) => {
   return () => removeCss.forEach(dispose => dispose())
 }
 
-ReactDom.hydrate(
+let ssrData = null
+if (document.getElementById('ssr-data')) {
+  ssrData = JSON.parse(document.getElementById('ssr-data').value)
+}
+
+const renderMethod = module.hot ? ReactDOM.render : ReactDOM.hydrate
+renderMethod(
   <StyleContext.Provider value={{ insertCss }}>
-    <App />
+    <App ssrData={ssrData} />
   </StyleContext.Provider>
   , document.getElementById('root'))
