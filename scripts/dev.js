@@ -6,6 +6,7 @@ const WebpackDevServer = require('webpack-dev-server')
 const webpackClientConfig = require('../config/webpack.dev.js')
 
 const port = process.env.SERVER_PORT || 5000
+const clientPort = process.env.CLIENT_PORT || 5001
 const clientCompiler = compile(webpackClientConfig)
 const clientDevServer = new WebpackDevServer(
   clientCompiler,
@@ -16,7 +17,7 @@ clientDevServer.listen(webpackClientConfig.devServer.port, err => {
   if (err) {
     console.error(err)
   } else {
-    console.log(`Webpack-dev-server listening at :5000`)
+    console.log(`Webpack-dev-server listening at :${clientPort}`)
   }
 })
 

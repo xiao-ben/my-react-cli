@@ -13,7 +13,7 @@ import { renderHtml, reader } from './template'
 
 let server = null
 const port = process.env.SERVER_PORT || 5000
-const clientPort = process.env.SERVER_PORT || 5001
+const clientPort = process.env.CLIENT_PORT || 5001
 const isProd = process.env.NODE_ENV === 'production'
 const app = new Koa()
 const router = new Router()
@@ -62,8 +62,7 @@ if (isProd) {
     module.hot.accept('../client/App')
     module.hot.dispose(() => server.close())
   }
-
   server = app.listen(port, () => {
-    console.log(`服务器已启动，请访问http://127.0.0.1:${port}`)
+    console.log(`服务器已启动，请访问  http://127.0.0.1:${port}`)
   })
 }

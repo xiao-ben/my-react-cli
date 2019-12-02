@@ -7,7 +7,7 @@
   "scripts": {
     "start": "yarn dev",
     "dev": "yarn clean && node ./scripts/dev.js",
-    "build": "yarn clean && NODE_ENV=production node ./scripts/build.js",
+    "build": "NODE_ENV=production node ./scripts/build.js",
     "clean": "rm -rf build",
     "lint": "standardx",
     "lint:fix": "standardx --fix",
