@@ -5,3 +5,7 @@
   text-decoration: underline;
   transform: scale(1);
 }
+
+.zaBorder {
+  border: 1px solid red;
+}
