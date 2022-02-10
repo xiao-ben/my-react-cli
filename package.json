@@ -71,7 +71,7 @@
     "husky": "^3.0.2",
     "isomorphic-style-loader": "^5.1.0",
     "lint-staged": "^9.2.1",
-    "node-sass": "^4.12.0",
+    "node-sass": "^7.0.0",
     "opn": "^6.0.0",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
     "postcss-import": "^12.0.1",
